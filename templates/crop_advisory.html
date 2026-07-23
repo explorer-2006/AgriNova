@@ -1,26 +1,17 @@
-{% extends "base.html" %} {% block title %}Crop Advisory{% endblock %} {% block
-head_extra %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/crop-advisory.css') }}"
-/>
-{% endblock %} {% block body %}
+{% extends "base.html" %}
+{% block title %}Crop Advisory{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/crop-advisory.css') }}">
+{% endblock %}
+
+{% block body %}
 <main class="screen">
+
   <div class="topbar">
-    <button
-      type="button"
-      class="topbar__back"
-      onclick="window.location.href='{{ url_for('farm_details') }}'"
-      aria-label="Back"
-    >
+    <button type="button" class="topbar__back" onclick="window.location.href='{{ url_for('farm_details') }}'" aria-label="Back">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M15 18l-6-6 6-6"
-          stroke="#26261F"
-          stroke-width="2.2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+        <path d="M15 18l-6-6 6-6" stroke="#26261F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </button>
   </div>
@@ -29,20 +20,8 @@ head_extra %}
     <div class="page-heading__title">
       <span class="page-heading__icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M12 21c0-6 3-10 8-11 0 7-3 11-8 11z"
-            stroke="var(--accent)"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M12 21c0-5-2.5-8-7-9 0 6 2.5 9 7 9z"
-            stroke="var(--accent)"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+          <path d="M12 21c0-6 3-10 8-11 0 7-3 11-8 11z" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 21c0-5-2.5-8-7-9 0 6 2.5 9 7 9z" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </span>
       Crop Advisory
@@ -51,32 +30,17 @@ head_extra %}
   </div>
 
   <div class="screen__scroll">
+
     <!-- Field photo upload -->
     <label class="photo-drop" for="fieldPhoto">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-        <rect
-          x="3"
-          y="5"
-          width="18"
-          height="14"
-          rx="2"
-          stroke="#A6A392"
-          stroke-width="1.6"
-        />
-        <circle cx="8.5" cy="10" r="1.5" fill="#A6A392" />
-        <path
-          d="M21 15l-5-5-9 9"
-          stroke="#A6A392"
-          stroke-width="1.6"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+        <rect x="3" y="5" width="18" height="14" rx="2" stroke="#A6A392" stroke-width="1.6"/>
+        <circle cx="8.5" cy="10" r="1.5" fill="#A6A392"/>
+        <path d="M21 15l-5-5-9 9" stroke="#A6A392" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span class="photo-drop__text"
-        >Healthy crop field, soft morning light</span
-      >
+      <span class="photo-drop__text">Healthy crop field, soft morning light</span>
       <span class="photo-drop__link">or browse files</span>
-      <input type="file" id="fieldPhoto" accept="image/*" hidden />
+      <input type="file" id="fieldPhoto" accept="image/*" hidden>
     </label>
 
     <!-- Today's priority -->
@@ -85,19 +49,13 @@ head_extra %}
       <div class="priority-card__head">
         <span class="icon-badge icon-badge--blue">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M12 3.5s6 6.6 6 10.6a6 6 0 11-12 0c0-4 6-10.6 6-10.6z"
-              stroke="#2B6CB0"
-              stroke-width="1.7"
-              stroke-linejoin="round"
-            />
+            <path d="M12 3.5s6 6.6 6 10.6a6 6 0 11-12 0c0-4 6-10.6 6-10.6z" stroke="#2B6CB0" stroke-width="1.7" stroke-linejoin="round"/>
           </svg>
         </span>
         <span class="priority-card__title">Irrigate Today</span>
       </div>
       <p class="priority-card__desc">
-        Soil moisture is expected to decrease this afternoon. Watering today
-        will help maintain healthy crop growth.
+        Soil moisture is expected to decrease this afternoon. Watering today will help maintain healthy crop growth.
       </p>
       <div class="priority-card__tags">
         <span class="pill">☀️ Sunny</span>
@@ -111,11 +69,9 @@ head_extra %}
     <p class="section-label section-label--spaced">Next 7 Days</p>
     <div class="day-strip">
       {% for day in week_plan %}
-      <button
-        type="button"
-        class="day-chip{% if day.active %} day-chip--active{% endif %}"
-        data-day="{{ day.label }}"
-      >
+      <button type="button"
+              class="day-chip{% if day.active %} day-chip--active{% endif %}"
+              data-day="{{ day.label }}">
         <span class="day-chip__label">{{ day.label }}</span>
         <span class="day-chip__icon">{{ day.icon }}</span>
         <span class="day-chip__action">{{ day.action }}</span>
@@ -128,18 +84,12 @@ head_extra %}
     <div class="task-list">
       {% for task in tasks %}
       <div class="card task-row">
-        <span
-          class="icon-badge{% if task.icon_class %} {{ task.icon_class }}{% endif %}"
-          >{{ task.icon }}</span
-        >
+        <span class="icon-badge{% if task.icon_class %} {{ task.icon_class }}{% endif %}">{{ task.icon }}</span>
         <span class="task-row__body">
           <span class="task-row__title">{{ task.title }}</span>
           <span class="task-row__desc">{{ task.desc }}</span>
         </span>
-        <span
-          class="pill{% if task.tag_style %} {{ task.tag_style }}{% endif %}"
-          >{{ task.tag }}</span
-        >
+        <span class="pill{% if task.tag_style %} {{ task.tag_style }}{% endif %}">{{ task.tag }}</span>
       </div>
       {% endfor %}
     </div>
@@ -149,14 +99,10 @@ head_extra %}
       <p class="confidence-card__label">Weather Confidence</p>
       <p class="confidence-card__value">{{ confidence }}%</p>
       <div class="confidence-card__track">
-        <div
-          class="confidence-card__fill"
-          style="width: {{ confidence }}%;"
-        ></div>
+        <div class="confidence-card__fill" style="width: {{ confidence }}%;"></div>
       </div>
       <p class="confidence-card__note">
-        The weather forecast is stable for today, making today's recommendations
-        highly reliable.
+        The weather forecast is stable for today, making today's recommendations highly reliable.
       </p>
     </div>
 
@@ -169,29 +115,20 @@ head_extra %}
         {% endfor %}
       </ul>
       <p class="why-card__footnote">
-        Our recommendations are based on your crop, soil type, sowing date, and
-        local weather.
+        Our recommendations are based on your crop, soil type, sowing date, and local weather.
       </p>
     </div>
+
   </div>
 
   <div class="btn-primary__bar">
-    <a
-      href="{{ tomorrow_url }}"
-      class="btn-primary"
-      style="text-decoration: none"
-    >
+    <a href="{{ tomorrow_url }}" class="btn-primary" style="text-decoration:none;">
       View Tomorrow's Plan
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M5 12h14M13 6l6 6-6 6"
-          stroke="currentColor"
-          stroke-width="2.2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
   </div>
+
 </main>
 {% endblock %}
