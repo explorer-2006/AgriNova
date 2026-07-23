@@ -1,0 +1,682 @@
+/* ============================================================
+   Dashboard — greeting, weather, feature cards, diagnosis
+   ============================================================ */
+
+/* ---------- Greeting ---------- */
+.greeting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+}
+
+.greeting__text {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.greeting__wave {
+  display: inline-block;
+  transform-origin: 70% 80%;
+  animation: wave 2.4s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(14deg);
+  }
+  80% {
+    transform: rotate(-8deg);
+  }
+  90% {
+    transform: rotate(12deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .greeting__wave {
+    animation: none;
+  }
+}
+
+.greeting__avatar {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: var(--radius-full);
+  background: var(--card);
+  color: var(--card-selected);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.greeting__avatar:hover {
+  background: var(--card-selected);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  transform: scale(1.08) rotate(4deg);
+}
+.greeting__avatar:hover svg circle,
+.greeting__avatar:hover svg path {
+  stroke: #fff;
+}
+.greeting__avatar:active {
+  transform: scale(0.94);
+}
+
+/* ---------- Weather card ---------- */
+.weather-card {
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  margin-bottom: var(--space-5);
+  background: linear-gradient(
+    155deg,
+    var(--hero-top) 0%,
+    #f6f1e2 50%,
+    var(--hero-bot) 100%
+  );
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.weather-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 24px,
+    rgba(0, 86, 63, 0.03) 24px,
+    rgba(0, 86, 63, 0.03) 25px
+  );
+  pointer-events: none;
+}
+
+.weather-card__location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--muted);
+  position: relative;
+}
+
+.weather-card__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  position: relative;
+}
+
+.weather-card__temp {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1.2px;
+  color: var(--text);
+}
+
+.weather-card__condition {
+  margin-top: var(--space-1);
+  font-size: var(--text-md);
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.weather-card__icon {
+  width: 58px;
+  height: 58px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 2px 8px rgba(0, 86, 63, 0.08);
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease;
+}
+
+.weather-card:hover .weather-card__icon {
+  transform: scale(1.1) rotate(8deg);
+}
+
+.weather-card__rain {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.8);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--info-fg);
+  backdrop-filter: blur(4px);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.weather-card:hover .weather-card__rain {
+  transform: translateX(2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Feature cards ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+/* Both cards start warm/creamy, turn misty jade on hover */
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    160deg,
+    var(--gold-wash) 0%,
+    var(--warm-wash) 100%
+  );
+  border: 1px solid rgba(201, 138, 44, 0.08);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    background 0.35s ease,
+    border-color 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(160deg, var(--card) 0%, #b0d4c4 100%);
+  border-color: transparent;
+}
+
+.feature-card:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Advisory card: slightly larger padding */
+.feature-card:first-child {
+  padding: var(--space-4);
+}
+
+.feature-card:first-child .feature-card__thumb {
+  height: 100px;
+}
+
+.feature-card:first-child .feature-card__title {
+  font-size: 16px;
+}
+
+/* Harvest card: gold corner accent */
+.feature-card:last-child::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  opacity: 0.3;
+  border-radius: 0 4px 0 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.feature-card:last-child:hover::after {
+  opacity: 0.15;
+  transform: translate(2px, -2px);
+}
+
+.feature-card__thumb {
+  height: 88px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin-bottom: var(--space-3);
+  position: relative;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.35s ease;
+}
+
+.feature-card:hover .feature-card__thumb {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+/* Thumbs also transition from warm to cool on hover */
+.feature-card__thumb--advisory {
+  background: linear-gradient(160deg, #faf3e8 0%, #f0e8d8 100%);
+}
+
+.feature-card:hover .feature-card__thumb--advisory {
+  background: linear-gradient(160deg, #eff9f3 0%, #cde9db 100%);
+}
+
+.feature-card__thumb--harvest {
+  background: linear-gradient(160deg, #faf3e8 0%, #efdfc0 100%);
+}
+
+.feature-card:hover .feature-card__thumb--harvest {
+  background: linear-gradient(160deg, #eff9f3 0%, #cde9db 100%);
+}
+
+.feature-card__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+}
+
+.feature-card__subtitle {
+  margin-top: 3px;
+  font-size: var(--text-xs);
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ---------- Disease detection ---------- */
+.diagnosis-card {
+  padding: var(--space-5) var(--space-4) var(--space-4);
+  background: linear-gradient(180deg, var(--warm-wash) 0%, var(--bg) 100%);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  border-top: 1px solid var(--border-light);
+  margin: 0 calc(-1 * var(--space-5)) var(--space-2);
+  padding-left: var(--space-5);
+  padding-right: var(--space-5);
+}
+
+.diagnosis-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+}
+
+.diagnosis-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.diagnosis-step__icon {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.diagnosis-step:hover .diagnosis-step__icon {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: var(--shadow-md);
+  background: var(--card-selected);
+  color: #fff;
+}
+
+.diagnosis-step:hover .diagnosis-step__icon svg path,
+.diagnosis-step:hover .diagnosis-step__icon svg circle {
+  stroke: #fff;
+}
+
+.diagnosis-step__label {
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.diagnosis-step__arrow {
+  flex: none;
+  color: var(--note);
+  margin-top: var(--space-4);
+  opacity: 0.5;
+  transition:
+    transform 0.3s ease,
+    opacity 0.2s ease;
+}
+
+.diagnosis-step:hover ~ .diagnosis-step__arrow,
+.diagnosis-steps:hover .diagnosis-step__arrow {
+  transform: translateX(3px);
+  opacity: 0.8;
+}
+
+.diagnosis-card__cta {
+  margin-top: var(--space-5);
+}
+
+/* ---------- Leaf photo preview ---------- */
+.leaf-preview {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.leaf-preview__img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.leaf-preview__img:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+.leaf-preview__clear {
+  border: none;
+  background: transparent;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  transition:
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.leaf-preview__clear:hover {
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding: var(--space-10) var(--space-5);
+  margin-top: var(--space-2);
+}
+
+.empty-state__icon-badge {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--card) 0%, var(--gold-soft) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-2);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
+}
+
+.empty-state__icon-badge:hover {
+  transform: scale(1.08) rotate(4deg);
+  box-shadow: var(--shadow-md);
+}
+
+.empty-state__icon-badge::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  width: 40px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+.empty-state__icon {
+  font-size: 32px;
+}
+
+.empty-state__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.empty-state__desc {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 260px;
+}
+
+/* ============================================================
+   Bottom navigation
+   ============================================================ */
+
+.screen--tabbed .screen__scroll {
+  padding-bottom: 100px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(198, 225, 214, 0.92);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -2px 20px rgba(0, 86, 63, 0.06);
+  z-index: 50;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 2px;
+  text-decoration: none;
+  color: var(--note);
+  transition:
+    color 0.2s ease,
+    transform 0.15s ease;
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+.nav-item:hover {
+  color: var(--muted);
+  transform: translateY(-1px);
+}
+
+.nav-item__icon {
+  width: 40px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-item:hover .nav-item__icon {
+  transform: scale(1.15);
+}
+
+.nav-item__label {
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  transition: font-weight 0.15s ease;
+}
+
+.nav-item--active {
+  color: var(--card-selected);
+}
+
+.nav-item--active .nav-item__icon {
+  background: rgba(0, 86, 63, 0.12);
+  transform: translateY(-2px);
+}
+
+.nav-item--active .nav-item__label {
+  font-weight: 700;
+}
+
+.nav-item:active .nav-item__icon {
+  transform: scale(0.92);
+}
+
+/* ============================================================
+   Falling leaves (plays once on dashboard open)
+   ============================================================ */
+
+.leaf-fall {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.leaf-fall__piece {
+  position: absolute;
+  top: -10%;
+  left: var(--x, 50%);
+  width: var(--size, 18px);
+  height: var(--size, 18px);
+  opacity: 0;
+  animation: leaf-fall-drop var(--duration, 6s) linear var(--delay, 0s) forwards;
+}
+
+.leaf-fall__piece svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: leaf-fall-sway var(--sway-duration, 3s) ease-in-out infinite
+    alternate;
+}
+
+@keyframes leaf-fall-drop {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(115vh) rotate(var(--spin, 220deg));
+    opacity: 0;
+  }
+}
+
+@keyframes leaf-fall-sway {
+  from {
+    margin-left: calc(var(--sway, 22px) * -1);
+  }
+  to {
+    margin-left: var(--sway, 22px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf-fall {
+    display: none;
+  }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 600px) {
+  .greeting__text {
+    font-size: 30px;
+  }
+  .weather-card__temp {
+    font-size: 44px;
+  }
+  .feature-card__thumb {
+    height: 110px;
+  }
+  .feature-card:first-child .feature-card__thumb {
+    height: 120px;
+  }
+}

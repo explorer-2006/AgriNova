@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}Farm Details{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/farm-details.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="screen">
+
+  <div class="topbar">
+    <button type="button" class="topbar__back" onclick="window.location.href='{{ url_for('dashboard') }}'" aria-label="Back">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18l-6-6 6-6" stroke="#26261F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="page-heading">
+    <div class="page-heading__title">
+      <span class="page-heading__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 21c0-6 3-10 8-11 0 7-3 11-8 11z" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 21c0-5-2.5-8-7-9 0 6 2.5 9 7 9z" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      Crop Advisory
+    </div>
+    <p class="page-heading__subtitle">
+      Tell us about your farm to receive a personalized 7-day farming plan.
+    </p>
+  </div>
+
+  <form id="farmForm" class="screen__scroll" novalidate>
+
+    <div class="step-progress">
+      <div class="step-progress__labels">
+        <span>Step 1 of 2</span>
+        <span class="step-progress__current">Farm Details</span>
+      </div>
+      <div class="step-progress__track">
+        <div class="step-progress__fill" style="width: 50%;"></div>
+      </div>
+    </div>
+
+    <!-- Crop -->
+    <label class="field-card" for="cropSelect">
+      <span class="icon-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 21V11" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M12 13c0-4.5 3.3-6.8 7.3-6.8C19.3 11 15.9 13 12 13z" stroke="var(--accent)" stroke-width="1.7" stroke-linejoin="round"/>
+          <path d="M12 16c0-3.4-2.6-5.2-5.8-5.2C6.4 14 8.9 16 12 16z" stroke="var(--accent)" stroke-width="1.7" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="field-card__body">
+        <span class="field-card__label">Crop</span>
+        <select id="cropSelect" name="crop" class="field-card__select" required>
+          <option value="" disabled selected>Select your crop</option>
+          <option value="wheat">Wheat</option>
+          <option value="cotton">Cotton</option>
+          <option value="groundnut">Groundnut</option>
+          <option value="bajra">Bajra (Pearl Millet)</option>
+          <option value="tur">Tur (Pigeon Pea)</option>
+          <option value="castor">Castor</option>
+        </select>
+      </span>
+      <svg class="field-card__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M6 9l6 6 6-6" stroke="#8A8878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </label>
+
+    <!-- Location -->
+    <label class="field-card" for="districtSelect">
+      <span class="icon-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z" stroke="var(--accent)" stroke-width="1.7" stroke-linejoin="round"/>
+          <circle cx="12" cy="10" r="2.4" stroke="var(--accent)" stroke-width="1.7"/>
+        </svg>
+      </span>
+      <span class="field-card__body">
+        <span class="field-card__label">Location</span>
+        <select id="districtSelect" name="district" class="field-card__select" required>
+          <option value="" disabled selected>Choose your district</option>
+          <option value="vadodara">Vadodara</option>
+          <option value="ahmedabad">Ahmedabad</option>
+          <option value="surat">Surat</option>
+          <option value="rajkot">Rajkot</option>
+          <option value="bhavnagar">Bhavnagar</option>
+          <option value="anand">Anand</option>
+        </select>
+      </span>
+      <svg class="field-card__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M6 9l6 6 6-6" stroke="#8A8878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </label>
+
+    <!-- Soil Type -->
+    <div class="card soil-card">
+      <div class="soil-card__label">
+        <span class="icon-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M4 8l8-4 8 4-8 4-8-4z" stroke="var(--accent)" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="M4 12l8 4 8-4" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 16l8 4 8-4" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>Soil Type</span>
+      </div>
+      <div class="soil-grid" role="radiogroup" aria-label="Soil type">
+        <button type="button" class="soil-option" role="radio" aria-checked="false" data-soil="sandy">Sandy</button>
+        <button type="button" class="soil-option" role="radio" aria-checked="false" data-soil="clay">Clay</button>
+        <button type="button" class="soil-option" role="radio" aria-checked="false" data-soil="loamy">Loamy</button>
+        <button type="button" class="soil-option" role="radio" aria-checked="false" data-soil="silt">Silt</button>
+      </div>
+      <input type="hidden" name="soil_type" id="soilTypeInput" required>
+    </div>
+
+    <!-- Sowing Date -->
+    <label class="field-card" for="sowingDate">
+      <span class="icon-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <rect x="3.5" y="5" width="17" height="16" rx="2.4" stroke="var(--accent)" stroke-width="1.7"/>
+          <path d="M3.5 9.5h17" stroke="var(--accent)" stroke-width="1.7"/>
+          <path d="M8 3v4M16 3v4" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="field-card__body">
+        <span class="field-card__label">Sowing Date</span>
+        <input type="date" id="sowingDate" name="sowing_date" class="field-card__select" required>
+      </span>
+    </label>
+
+    <div class="hint-banner">
+      <span>💡</span>
+      <span>Your recommendations become more accurate when farm details are correct.</span>
+    </div>
+
+  </form>
+
+  <div class="btn-primary__bar">
+    <button type="submit" form="farmForm" id="generateBtn" class="btn-primary" disabled>
+      Generate 7-Day Plan
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/farm-details.js') }}"></script>
+{% endblock %}
