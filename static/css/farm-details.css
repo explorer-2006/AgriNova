@@ -1,45 +1,108 @@
 /* ============================================================
-   Farm Details — Step 1 of 2
+   Farm Details — Misty Jade + Ivory + Castleton Green
    ============================================================ */
 
 /* ---------- Step progress ---------- */
-.step-progress { margin: 4px 0 20px; }
+.step-progress {
+  margin: var(--space-1) 0 var(--space-5);
+}
 
 .step-progress__labels {
   display: flex;
   justify-content: space-between;
-  font-size: 12.5px;
+  font-size: var(--text-sm);
   color: var(--muted);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
+  font-weight: 500;
 }
 
-.step-progress__current { color: var(--text); font-weight: 600; }
+.step-progress__current {
+  color: var(--text);
+  font-weight: 700;
+}
 
 .step-progress__track {
   height: 6px;
-  border-radius: 999px;
-  background: var(--border);
+  border-radius: var(--radius-full);
+  background: var(--border-light);
   overflow: hidden;
+  box-shadow: var(--shadow-inset);
+  position: relative;
 }
 
 .step-progress__fill {
   height: 100%;
-  border-radius: 999px;
-  background: var(--accent);
-  transition: width 0.3s ease;
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--accent-2) 50%,
+    var(--accent-soft) 100%
+  );
+  background-size: 200% 100%;
+  animation: progressShine 3s ease-in-out infinite;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ---------- Field card (select / date wrapped like a card) ---------- */
+@keyframes progressShine {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ---------- Field cards ---------- */
 .field-card {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: var(--space-3);
   background: var(--card);
-  border-radius: 18px;
-  box-shadow: 0 2px 14px rgba(38, 38, 31, 0.06);
-  padding: 14px 16px;
-  margin-bottom: 14px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-3);
   cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.field-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(180deg, var(--accent-soft), var(--accent));
+  transition: width 0.3s ease;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.field-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px) translateX(2px);
+  border-color: var(--accent-soft);
+}
+
+.field-card:hover::before {
+  width: 4px;
+}
+
+.field-card:has(.field-card__select:focus) {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.field-card:hover .icon-badge {
+  transform: scale(1.15) rotate(-10deg);
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .field-card__body {
@@ -51,74 +114,173 @@
 }
 
 .field-card__label {
-  font-size: 12px;
+  font-size: var(--text-xs);
   color: var(--sub);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .field-card__select {
   border: none;
   background: transparent;
-  font-size: 16px;
+  font-size: var(--text-md);
   font-weight: 600;
   color: var(--text);
   padding: 0;
   appearance: none;
   -webkit-appearance: none;
   width: 100%;
+  font-family: var(--font-display);
+  letter-spacing: -0.2px;
+  cursor: pointer;
 }
 
-.field-card__select:invalid { color: var(--text); }
+.field-card__select:invalid {
+  color: var(--text);
+}
+.field-card__select:focus {
+  outline: none;
+}
 
-.field-card__select:focus { outline: none; }
+.field-card__chevron {
+  flex: none;
+  color: var(--note);
+  transition: all 0.2s ease;
+}
 
-.field-card__chevron { flex: none; }
+.field-card:hover .field-card__chevron {
+  transform: translateX(3px);
+  color: var(--accent);
+}
 
 /* ---------- Soil type ---------- */
-.soil-card { margin-bottom: 14px; }
+.soil-card {
+  margin-bottom: var(--space-3);
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.soil-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-soft);
+}
 
 .soil-card__label {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-size: 12px;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
   color: var(--sub);
-  margin-bottom: 14px;
+  margin-bottom: var(--space-3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .soil-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: var(--space-2);
 }
 
 .soil-option {
-  padding: 14px 8px;
-  border-radius: 14px;
-  border: 2px solid transparent;
+  padding: var(--space-3) var(--space-2);
+  border-radius: var(--radius-md);
+  border: 2.5px solid transparent;
   background: var(--bg);
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text);
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: var(--font-display);
+  letter-spacing: -0.2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.soil-option::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-soft), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.soil-option:hover {
+  background: var(--accent-wash);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.soil-option:hover::before {
+  opacity: 0.3;
 }
 
 .soil-option[aria-checked="true"] {
   background: var(--card-selected);
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--bg);
+  box-shadow:
+    0 0 0 4px rgba(27, 77, 62, 0.1),
+    var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.soil-option[aria-checked="true"]:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 4px rgba(27, 77, 62, 0.15),
+    var(--shadow-lg);
+}
+
+.soil-option[aria-checked="true"]::before {
+  opacity: 0.2;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
 }
 
 /* ---------- Hint banner ---------- */
 .hint-banner {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  background: var(--info-bg);
+  gap: var(--space-3);
+  background: linear-gradient(
+    135deg,
+    var(--info-bg) 0%,
+    var(--accent-wash) 100%
+  );
   color: var(--info-fg);
-  border-radius: 14px;
-  padding: 12px 14px;
-  font-size: 12.5px;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
   line-height: 1.5;
-  margin: 4px 0 20px;
+  margin: var(--space-1) 0 var(--space-5);
+  border-left: 4px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.hint-banner:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.hint-banner::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 14px;
+  height: 14px;
+  border-top: 2.5px solid var(--accent);
+  border-right: 2.5px solid var(--accent);
+  opacity: 0.12;
+  border-radius: 0 4px 0 0;
 }

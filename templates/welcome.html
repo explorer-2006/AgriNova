@@ -1,31 +1,110 @@
-{% extends "base.html" %}
-{% block title %}Welcome{% endblock %}
-
-{% block head_extra %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/welcome.css') }}">
-{% endblock %}
-
-{% block body %}
+{% extends "base.html" %} {% block title %}Welcome{% endblock %} {% block
+head_extra %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/welcome.css') }}"
+/>
+{% endblock %} {% block body %}
 <main class="welcome" data-current-lang="{{ current_lang or '' }}">
-
-  <!-- Hero illustration area -->
   <section class="welcome__hero" aria-hidden="true">
-    <!-- Swap this for your real illustration (SVG/PNG in /static/img/) -->
-    <div class="welcome__hero-placeholder">
-      <span>🌾</span>
-    </div>
+    <svg
+      class="welcome__hero-art"
+      viewBox="0 0 400 320"
+      preserveAspectRatio="xMidYMax slice"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="320" cy="55" r="36" fill="var(--gold)" opacity="0.85" />
+      <g
+        stroke="var(--gold)"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        opacity="0.4"
+      >
+        <line x1="320" y1="6" x2="320" y2="16" />
+        <line x1="365" y1="21" x2="356" y2="30" />
+        <line x1="380" y1="55" x2="368" y2="55" />
+        <line x1="365" y1="89" x2="356" y2="80" />
+        <line x1="320" y1="104" x2="320" y2="94" />
+      </g>
+      <path
+        d="M55 42q8-8 16 0q8-8 16 0"
+        stroke="var(--accent)"
+        stroke-width="2.2"
+        fill="none"
+        stroke-linecap="round"
+        opacity="0.35"
+      />
+      <path
+        d="M98 60q7-7 14 0q7-7 14 0"
+        stroke="var(--accent)"
+        stroke-width="2.2"
+        fill="none"
+        stroke-linecap="round"
+        opacity="0.25"
+      />
+      <path d="M0 185Q85 148 195 175T400 162V320H0Z" fill="var(--hero-bot)" />
+      <path d="M0 228Q105 194 225 217T400 203V320H0Z" fill="#C9DFC0" />
+      <path d="M0 258Q115 230 215 248T400 236V320H0Z" fill="var(--accent-2)" />
+      <g stroke="var(--accent)" stroke-width="1.8" opacity="0.3" fill="none">
+        <path d="M-10 274Q115 244 225 264T410 250" />
+        <path d="M-10 288Q115 258 225 278T410 264" />
+        <path d="M-10 302Q115 274 225 294T410 280" />
+      </g>
+      <g
+        stroke="var(--accent)"
+        stroke-width="3"
+        stroke-linecap="round"
+        fill="none"
+      >
+        <path d="M145 254v-20" />
+        <path d="M145 237q-9-6-15 2" />
+        <path d="M145 241q9-7 16 0" />
+        <path d="M228 246v-22" />
+        <path d="M228 226q-10-7-17 1" />
+        <path d="M228 230q10-8 18 0" />
+        <path d="M310 250v-18" />
+        <path d="M310 235q-8-5-13 1" />
+        <path d="M310 238q8-6 14 0" />
+      </g>
+      <g
+        stroke="var(--accent)"
+        stroke-width="1.5"
+        fill="none"
+        opacity="0.15"
+        stroke-linecap="round"
+      >
+        <rect x="280" y="268" width="32" height="22" rx="3" />
+        <line x1="280" y1="279" x2="312" y2="279" />
+        <line x1="296" y1="268" x2="296" y2="290" />
+      </g>
+      <g
+        stroke="var(--gold)"
+        stroke-width="1.5"
+        fill="none"
+        opacity="0.2"
+        stroke-linecap="round"
+      >
+        <line x1="55" y1="285" x2="85" y2="285" />
+        <line x1="70" y1="278" x2="70" y2="285" />
+        <circle cx="70" cy="275" r="3" />
+      </g>
+    </svg>
   </section>
 
-  <!-- Content -->
   <section class="welcome__content">
     <h1 class="welcome__title">Welcome</h1>
     <p class="welcome__subtitle">
       Helping you make better farming decisions, one step at a time.
     </p>
 
-    <!-- Language cards -->
     <div class="lang-list" role="radiogroup" aria-label="Choose language">
-      <button type="button" class="lang-card" role="radio" aria-checked="false" data-lang="en">
+      <button
+        type="button"
+        class="lang-card"
+        role="radio"
+        aria-checked="false"
+        data-lang="en"
+      >
         <span class="lang-card__icon">A</span>
         <span class="lang-card__text">
           <span class="lang-card__name">English</span>
@@ -33,13 +112,25 @@
         </span>
         <span class="lang-card__check" aria-hidden="true">
           <svg viewBox="0 0 20 16" width="12" height="10">
-            <path d="M2 8.5l5 5 11-11" stroke="white" stroke-width="2.6"
-                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              d="M2 8.5l5 5 11-11"
+              stroke="white"
+              stroke-width="2.6"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </span>
       </button>
 
-      <button type="button" class="lang-card" role="radio" aria-checked="false" data-lang="hi">
+      <button
+        type="button"
+        class="lang-card"
+        role="radio"
+        aria-checked="false"
+        data-lang="hi"
+      >
         <span class="lang-card__icon">अ</span>
         <span class="lang-card__text">
           <span class="lang-card__name">हिन्दी</span>
@@ -47,13 +138,25 @@
         </span>
         <span class="lang-card__check" aria-hidden="true">
           <svg viewBox="0 0 20 16" width="12" height="10">
-            <path d="M2 8.5l5 5 11-11" stroke="white" stroke-width="2.6"
-                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              d="M2 8.5l5 5 11-11"
+              stroke="white"
+              stroke-width="2.6"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </span>
       </button>
 
-      <button type="button" class="lang-card" role="radio" aria-checked="false" data-lang="gu">
+      <button
+        type="button"
+        class="lang-card"
+        role="radio"
+        aria-checked="false"
+        data-lang="gu"
+      >
         <span class="lang-card__icon">અ</span>
         <span class="lang-card__text">
           <span class="lang-card__name">ગુજરાતી</span>
@@ -61,8 +164,14 @@
         </span>
         <span class="lang-card__check" aria-hidden="true">
           <svg viewBox="0 0 20 16" width="12" height="10">
-            <path d="M2 8.5l5 5 11-11" stroke="white" stroke-width="2.6"
-                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              d="M2 8.5l5 5 11-11"
+              stroke="white"
+              stroke-width="2.6"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </span>
       </button>
@@ -75,10 +184,7 @@
     </button>
     <p class="welcome__note">You can change your language anytime.</p>
   </section>
-
 </main>
-{% endblock %}
-
-{% block scripts %}
-  <script src="{{ url_for('static', filename='js/welcome.js') }}"></script>
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/welcome.js') }}"></script>
 {% endblock %}
