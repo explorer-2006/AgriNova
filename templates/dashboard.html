@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="screen screen--tabbed">
+
+  <!-- Greeting -->
+  <header class="greeting">
+    <h1 class="greeting__text">Hi, {{ user_name }} <span class="greeting__wave">👋</span></h1>
+    <a href="{{ url_for('settings') }}" class="greeting__avatar" aria-label="Profile">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8.5" r="3.6" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </header>
+
+  <div class="screen__scroll">
+
+    <!-- Weather card (static) -->
+    <section class="weather-card">
+      <p class="weather-card__location">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"
+                stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
+          <circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.9"/>
+        </svg>
+        {{ weather.location }}
+      </p>
+
+      <div class="weather-card__main">
+        <div>
+          <p class="weather-card__temp">{{ weather.temp }}°C</p>
+          <p class="weather-card__condition">{{ weather.condition }}</p>
+        </div>
+        <span class="weather-card__icon">{{ weather.icon }}</span>
+      </div>
+
+      <span class="weather-card__rain">
+        <span aria-hidden="true">💧</span> {{ weather.rain_chance }}% chance of rain
+      </span>
+    </section>
+
+    <!-- Feature cards -->
+    <section class="feature-grid">
+
+      <a href="{{ url_for('crop_advisory') }}" class="feature-card">
+        <span class="feature-card__thumb feature-card__thumb--advisory" aria-hidden="true">🌾</span>
+        <span class="feature-card__title"><span aria-hidden="true">🌱</span> Crop Advisory</span>
+        <span class="feature-card__subtitle">7-Day Plan</span>
+      </a>
+
+      <a href="{{ url_for('harvest') }}" class="feature-card">
+        <span class="feature-card__thumb feature-card__thumb--harvest" aria-hidden="true">🚜</span>
+        <span class="feature-card__title"><span aria-hidden="true">📦</span> Harvest Decision</span>
+        <span class="feature-card__subtitle">Sell • Store • Transport</span>
+      </a>
+
+    </section>
+
+    <!-- Disease detection -->
+    <section class="card diagnosis-card">
+
+      <div class="diagnosis-steps">
+        <div class="diagnosis-step">
+          <span class="diagnosis-step__icon">📷</span>
+          <span class="diagnosis-step__label">Take a<br>picture</span>
+        </div>
+
+        <span class="diagnosis-step__arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+
+        <div class="diagnosis-step">
+          <span class="diagnosis-step__icon">🌱</span>
+          <span class="diagnosis-step__label">See diagnosis</span>
+        </div>
+
+        <span class="diagnosis-step__arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+
+        <div class="diagnosis-step">
+          <span class="diagnosis-step__icon">💧</span>
+          <span class="diagnosis-step__label">Get medicine</span>
+        </div>
+      </div>
+
+      <!-- Preview appears here after a file is chosen -->
+      <div id="leafPreview" class="leaf-preview" hidden>
+        <img id="leafPreviewImg" class="leaf-preview__img" alt="Selected crop photo">
+        <button type="button" id="leafPreviewClear" class="leaf-preview__clear">
+          Remove photo
+        </button>
+      </div>
+
+      <button type="button" id="takePictureBtn" class="btn-primary diagnosis-card__cta">
+        Take a Picture
+      </button>
+
+      <input type="file" id="leafInput" accept="image/*" capture="environment" hidden>
+    </section>
+
+  </div>
+
+  {% include "_bottom_nav.html" %}
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

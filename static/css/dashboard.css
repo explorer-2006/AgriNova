@@ -1,0 +1,344 @@
+/* ============================================================
+   Dashboard — greeting, weather, feature cards, diagnosis
+   Also contains the shared .bottom-nav (used by placeholder pages)
+   ============================================================ */
+
+/* ---------- Greeting ---------- */
+.greeting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 22px 20px 16px;
+}
+
+.greeting__text {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+
+.greeting__wave {
+  display: inline-block;
+  transform-origin: 70% 80%;
+  animation: wave 2.4s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  70%           { transform: rotate(14deg); }
+  80%           { transform: rotate(-8deg); }
+  90%           { transform: rotate(12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .greeting__wave { animation: none; }
+}
+
+.greeting__avatar {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.greeting__avatar:active { transform: scale(0.94); }
+
+/* ---------- Weather card ---------- */
+.weather-card {
+  border-radius: 22px;
+  padding: 18px 20px 20px;
+  margin-bottom: 18px;
+  background: linear-gradient(145deg, var(--hero-top) 0%, #F6F1E2 55%, var(--hero-bot) 100%);
+  box-shadow: 0 2px 16px rgba(38, 38, 31, 0.06);
+}
+
+.weather-card__location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.weather-card__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.weather-card__temp {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  color: var(--text);
+}
+
+.weather-card__condition {
+  margin-top: 4px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.weather-card__icon {
+  width: 58px;
+  height: 58px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.weather-card__rain {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--info-fg);
+}
+
+/* ---------- Feature cards ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border-radius: 20px;
+  background: var(--accent-soft);
+  text-decoration: none;
+  box-shadow: 0 2px 14px rgba(38, 38, 31, 0.05);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.feature-card:active {
+  transform: scale(0.975);
+  box-shadow: 0 1px 8px rgba(38, 38, 31, 0.08);
+}
+
+.feature-card__thumb {
+  height: 88px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.feature-card__thumb--advisory {
+  background: linear-gradient(160deg, #EAF3E4 0%, #D8E9CE 100%);
+}
+
+.feature-card__thumb--harvest {
+  background: linear-gradient(160deg, #F5EEDD 0%, #E7DCC4 100%);
+}
+
+.feature-card__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.feature-card__subtitle {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Disease detection ---------- */
+.diagnosis-card { padding: 22px 16px 18px; }
+
+.diagnosis-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+}
+
+.diagnosis-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.diagnosis-step__icon {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.diagnosis-step__label {
+  font-size: 12.5px;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--muted);
+}
+
+.diagnosis-step__arrow {
+  flex: none;
+  color: var(--note);
+  margin-top: 20px;
+}
+
+.diagnosis-card__cta { margin-top: 20px; }
+
+/* ---------- Leaf photo preview ---------- */
+.leaf-preview {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.leaf-preview__img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  background: var(--bg);
+}
+
+.leaf-preview__clear {
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* ---------- Empty state (placeholder pages) ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 40px 24px;
+  margin-top: 8px;
+}
+
+.empty-state__icon { font-size: 40px; }
+
+.empty-state__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.empty-state__desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 260px;
+}
+
+/* ============================================================
+   Bottom navigation (shared)
+   ============================================================ */
+
+/* Reserve space so content never hides behind the fixed nav. */
+.screen--tabbed .screen__scroll { padding-bottom: 100px; }
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: var(--card);
+  border-radius: 26px 26px 0 0;
+  box-shadow: 0 -2px 20px rgba(38, 38, 31, 0.08);
+  z-index: 50;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 2px;
+  text-decoration: none;
+  color: var(--note);
+  transition: color 0.2s ease;
+}
+
+.nav-item__icon {
+  width: 40px;
+  height: 30px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.nav-item__label {
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.nav-item--active {
+  color: var(--accent);
+}
+
+.nav-item--active .nav-item__icon {
+  background: var(--accent-soft);
+}
+
+.nav-item--active .nav-item__label {
+  font-weight: 700;
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 600px) {
+  .greeting__text  { font-size: 24px; }
+  .weather-card__temp { font-size: 44px; }
+  .feature-card__thumb { height: 110px; }
+}

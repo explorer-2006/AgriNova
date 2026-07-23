@@ -1,0 +1,173 @@
+/* ============================================================
+   Shared base — design tokens & common components
+   Used by welcome, farm-details, crop-advisory screens
+   ============================================================ */
+
+:root {
+  --bg:            #FBF6EC;
+  --card:          #FFFFFF;
+  --card-selected: #E4EFDD;
+  --accent:        #2E5233;
+  --accent-soft:   #E4EFDD;
+  --text:          #26261F;
+  --muted:         #7C7A6C;
+  --sub:           #8A8878;
+  --note:          #A6A392;
+  --border:        #DEDACB;
+  --disabled-bg:   #E9E5D6;
+  --disabled-fg:   #ADA994;
+  --hero-top:      #FBEFD9;
+  --hero-mid:      #F3E7C9;
+  --hero-bot:      #E4EFDD;
+
+  --warn-bg:       #FDF3DD;
+  --warn-fg:       #8A6D1D;
+  --info-bg:       #E9F1E7;
+  --info-fg:       #3C5A40;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+               system-ui, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, select, input { font-family: inherit; }
+
+/* ---------- Shared mobile screen shell ---------- */
+.screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--bg);
+}
+
+.screen__scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px 24px;
+}
+
+/* ---------- Top bar (back button + title) ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 20px 8px;
+}
+
+.topbar__back {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 50%;
+  border: none;
+  background: var(--card);
+  box-shadow: 0 1px 6px rgba(38, 38, 31, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.page-heading {
+  padding: 4px 20px 16px;
+}
+
+.page-heading__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.page-heading__subtitle {
+  margin-top: 4px;
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ---------- Generic card ---------- */
+.card {
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: 0 2px 14px rgba(38, 38, 31, 0.06);
+  padding: 16px;
+}
+
+/* ---------- Pill / tag ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--info-bg);
+  color: var(--info-fg);
+}
+
+.pill--warn { background: var(--warn-bg); color: var(--warn-fg); }
+.pill--accent { background: var(--accent-soft); color: var(--accent); }
+
+/* ---------- Icon badge (circle) ---------- */
+.icon-badge {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* ---------- Primary button ---------- */
+.btn-primary {
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(46, 82, 51, 0.25);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.3s ease, color 0.3s ease,
+              box-shadow 0.3s ease, transform 0.1s ease;
+}
+
+.btn-primary:active { transform: scale(0.98); }
+
+.btn-primary:disabled {
+  background: var(--disabled-bg);
+  color: var(--disabled-fg);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-primary__bar {
+  position: sticky;
+  bottom: 0;
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(251,246,236,0) 0%, var(--bg) 35%);
+}

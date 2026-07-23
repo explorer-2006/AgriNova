@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/welcome.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="welcome" data-current-lang="{{ current_lang or '' }}">
+
+  <!-- Hero illustration area -->
+  <section class="welcome__hero" aria-hidden="true">
+    <!-- Swap this for your real illustration (SVG/PNG in /static/img/) -->
+    <div class="welcome__hero-placeholder">
+      <span>🌾</span>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="welcome__content">
+    <h1 class="welcome__title">Welcome</h1>
+    <p class="welcome__subtitle">
+      Helping you make better farming decisions, one step at a time.
+    </p>
+
+    <!-- Language cards -->
+    <div class="lang-list" role="radiogroup" aria-label="Choose language">
+      <button type="button" class="lang-card" role="radio" aria-checked="false" data-lang="en">
+        <span class="lang-card__icon">A</span>
+        <span class="lang-card__text">
+          <span class="lang-card__name">English</span>
+          <span class="lang-card__sub">Continue in English</span>
+        </span>
+        <span class="lang-card__check" aria-hidden="true">
+          <svg viewBox="0 0 20 16" width="12" height="10">
+            <path d="M2 8.5l5 5 11-11" stroke="white" stroke-width="2.6"
+                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <button type="button" class="lang-card" role="radio" aria-checked="false" data-lang="hi">
+        <span class="lang-card__icon">अ</span>
+        <span class="lang-card__text">
+          <span class="lang-card__name">हिन्दी</span>
+          <span class="lang-card__sub">हिंदी में जारी रखें</span>
+        </span>
+        <span class="lang-card__check" aria-hidden="true">
+          <svg viewBox="0 0 20 16" width="12" height="10">
+            <path d="M2 8.5l5 5 11-11" stroke="white" stroke-width="2.6"
+                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <button type="button" class="lang-card" role="radio" aria-checked="false" data-lang="gu">
+        <span class="lang-card__icon">અ</span>
+        <span class="lang-card__text">
+          <span class="lang-card__name">ગુજરાતી</span>
+          <span class="lang-card__sub">ગુજરાતીમાં ચાલુ રાખો</span>
+        </span>
+        <span class="lang-card__check" aria-hidden="true">
+          <svg viewBox="0 0 20 16" width="12" height="10">
+            <path d="M2 8.5l5 5 11-11" stroke="white" stroke-width="2.6"
+                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="welcome__spacer"></div>
+
+    <button type="button" id="continueBtn" class="btn-continue" disabled>
+      Continue
+    </button>
+    <p class="welcome__note">You can change your language anytime.</p>
+  </section>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/welcome.js') }}"></script>
+{% endblock %}
