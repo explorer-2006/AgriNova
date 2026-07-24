@@ -21,7 +21,7 @@ AgriNova is a two-engine decision-support web app:
 ### Crop Advisory Engine
 Generates a day-wise, 7-day plan for irrigation, fertilizer, and pest control — based on crop type, soil type, sowing date, and live weather data. Not a flat weekly summary; each day's advisory adjusts to crop growth stage and confidence decreases transparently the further out the forecast goes.
 
-### Sell / Store / Transport Planner
+## Sell / Store / Transport Planner
 Compares three real outcomes for harvested crop:
 - **Sell today** at the local mandi's current price
 - **Store**, accounting for spoilage-driven value decay while waiting for a possible price rise
@@ -60,6 +60,24 @@ flask run
 
 Then open `http://localhost:5000` in your browser.
 
+
+## Mobile Access
+
+AgriNova is designed for smallholder farmers, so it follows a mobile-first design — the interface is optimized for smartphone screens, since many farmers may not have access to laptops or desktop computers.
+
+During development, we test on real devices using **ngrok**, so we can see the app exactly as a farmer would.
+
+### Steps
+1. Complete the [Getting Started](#getting-started) setup above and make sure the app is running (`python app.py`).
+2. In a new terminal, start ngrok:
+   ​```bash
+   ngrok http 5000
+   ​```
+3. ngrok will generate a URL like `https://abcd-1234.ngrok-free.app`.
+4. Open that URL on any mobile device connected to the internet to experience the app as an end user would.                                    
+
+*The current use of ngrok is only for development and testing .The final version of AgriNova will be deployed on Render, providing a permanent public URL that can be accessed without running the project locally.*
+
 ## Project Structure
 
 AgriNova/
@@ -76,14 +94,15 @@ AgriNova/
 - SMS/WhatsApp price-threshold alerts
 - Extending the decision engine into a multi-day, multi-mandi comparison as prediction confidence improves
 
+  
 ## Team — FirstCommit
 
 | Name | Role |
 |---|---|
-| Rudra Patel | Frontend & Design |
-| Shivam Kamat | Frontend & Data Visualization |
-| Meet Buddhdev | Backend & AI/ML Integration |
-| Janisha Patel | Backend & Database Management |
+| Rudra Patel      | Frontend & Design             |
+| Shivam Kamat     | Frontend & Data Visualization |
+| Meet Buddhdev    | Backend & AI/ML Integration   |
+| Janisha Patel    | Backend & Database Management |
 
 ---
 
